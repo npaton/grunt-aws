@@ -3,7 +3,7 @@ var AWS = require("aws-sdk"),
     async = require("async");
 
 module.exports = function(grunt) {
- 
+
   //cloudfront description
   var DESC = "grunt-aws's cloudfront";
 
@@ -11,13 +11,13 @@ module.exports = function(grunt) {
   var DEFAULTS = {};
 
   //cloudfront task
-  grunt.registerTask("cloudfront", DESC, function() {
+  grunt.registerMultiTask("cloudfront", DESC, function() {
 
     //get options
     var opts = this.options(DEFAULTS);
 
     if(_.isEmpty(opts.distributionId))
-      return grunt.log.ok("No DistributionId specified");    
+      return grunt.log.ok("No DistributionId specified");
 
     if(_.isEmpty(opts.invalidations))
       return grunt.log.ok("No invalidations specified");
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       'accessKeyId',
       'secretAccessKey'
     ), true);
- 
+
     //cloudfront client
     var cloudfront = new AWS.CloudFront();
 
